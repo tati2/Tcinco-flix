@@ -9,9 +9,14 @@ const apiSeries = axios.create({
 export default class Series extends React.Component {
   state = {
     listSeries: [],
+    filtroBusca:[]
   };
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getSeries()
+  }
+  
+  getSeries = async () => {
     const responseTv = await apiSeries.get();  
     const series = responseTv.data.results.map((item) => {
       return {
@@ -22,15 +27,33 @@ export default class Series extends React.Component {
 
     this.setState({
       listSeries: series,
-    });
-    
+      filtroBusca:series
+    });    
+  }
+
+  buscarSeries = (event) => {
+    let {listSeries} = this.state
+
+    const seriesFiltradas = listSeries.filter((item) => {
+      if(item.name.toLowerCase().includes(event.target.value.toLowerCase())){
+        return true;
+      }
+    })
+
+    this.setState({
+      filtroBusca: seriesFiltradas
+    })   
   }
 
   render() {
     return (
       <div>
         <h1>Series</h1>
-        {this.state.listSeries.map((item) => (
+        <input onChange={this.buscarSeries}
+        type="text"
+        placeholder="Buque um filme..."
+        />
+        {this.state.filtroBusca.map((item) => (
           <div>
             <p>{item.name}</p>
             <img src={item.poster_path} alt="" />
