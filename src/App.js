@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Routes, Route } from "react-router-dom"
 import styled from "styled-components"
-import GlobalStyle from './services/GlobalStyle';
 import Movies from './pages/Movies';
 import Series from './pages/Shows';
 import Home from './pages/Home';
+
 
 
 const StyledLink = styled(Link)`
@@ -37,8 +37,7 @@ export default class App extends React.Component {
   
   render() {
     return (
-      <Router> 
-        <GlobalStyle/>     
+      <Router>    
         <MenuNavegation>
           <Menu>
             <li>

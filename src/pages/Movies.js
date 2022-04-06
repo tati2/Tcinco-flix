@@ -1,5 +1,11 @@
 import React from 'react';
-import MoviesApi from "../services/MoviesApi"
+import axios from 'axios';
+
+ const apiFilmes = axios.create({
+  baseURL:
+    'https://api.themoviedb.org/3/movie/popular?api_key=674e056a0305570de7e7dea12691bb59',
+});
+
 
 
 export default class Movies extends React.Component {
@@ -13,7 +19,7 @@ export default class Movies extends React.Component {
   }
 
   getFilmes = async () => {
-    const response = await MoviesApi.get();  
+    const response = await apiFilmes.get();  
     const filmes = response.data.results.map((item) => {
       return {
         ...item,
@@ -23,7 +29,7 @@ export default class Movies extends React.Component {
 
     this.setState({
       listFilmes: filmes,
-      resultfilms: filmes
+      resultfilms: filmes    
     });
   }
 
