@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import * as S from "./Style"
 
- const apiFilmes = axios.create({
+
+
+const apiFilmes = axios.create({
   baseURL:
     'https://api.themoviedb.org/3/movie/popular?api_key=674e056a0305570de7e7dea12691bb59',
 });
@@ -19,7 +22,7 @@ export default class Movies extends React.Component {
   }
 
   getFilmes = async () => {
-    const response = await apiFilmes.get();  
+    const response = await apiFilmes.get();
     const filmes = response.data.results.map((item) => {
       return {
         ...item,
@@ -29,16 +32,16 @@ export default class Movies extends React.Component {
 
     this.setState({
       listFilmes: filmes,
-      resultfilms: filmes    
+      resultfilms: filmes
     });
   }
 
 
   buscarFilmes = (event) => {
-    let {listFilmes} = this.state
+    let { listFilmes } = this.state
 
     const filmesFiltrados = listFilmes.filter((item) => {
-      if(item.title.toLowerCase().includes(event.target.value.toLowerCase())){
+      if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
         return true
       }
     })
@@ -51,20 +54,24 @@ export default class Movies extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Filmes</h1> 
-        <input 
-        type="text"
-        placeholder="buscar filme..."
-        onChange={this.buscarFilmes}
-        />       
-        {this.state.resultfilms.map((item) => (
-          <div>
-            <p>{item.title}</p>
-            <img src={item.poster_path} alt="" />
-          </div>
-        ))}
-      </div>
+      <S.Container>
+        <S.Busca>
+          <h1>Filmes</h1>
+          <S.CampoBusca
+            type="text"
+            placeholder="buscar filme..."
+            onChange={this.buscarFilmes}
+          />
+        </S.Busca>
+        <S.BoxMap>
+          {this.state.resultfilms.map((item) => (
+            <S.Card>
+              <S.Img src={item.poster_path} alt={item.title} />
+              <p>{item.title}</p>
+            </S.Card>
+          ))}
+        </S.BoxMap>
+      </S.Container>
     );
   }
 }

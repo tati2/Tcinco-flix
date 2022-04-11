@@ -1,9 +1,13 @@
 import React from "react"
+import * as S from "./Style"
+import MovieSlides from "../slides/movieSlides"
+
 
 const Home = () => {
     return(
         <div>
-            <h1>T-CINCO FLIX</h1>
+            <S.Title>T-CINCO FLIX</S.Title>
+            <MovieSlides/>        
         </div>
     )
 }

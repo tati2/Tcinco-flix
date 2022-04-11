@@ -4,8 +4,7 @@ import styled from "styled-components"
 import Movies from './pages/Movies';
 import Series from './pages/Shows';
 import Home from './pages/Home';
-
-
+import GlobalStyle from './services/GlobalStyle';
 
 const StyledLink = styled(Link)`
 color: #fff;
@@ -27,7 +26,7 @@ const Menu = styled.ul`
 width: 300px;
 display:flex;
 justify-content: space-between;
-// background-color: blue;
+/* // background-color: blue; */
 list-style: none;
 `
 
@@ -37,7 +36,8 @@ export default class App extends React.Component {
   
   render() {
     return (
-      <Router>    
+      <Router> 
+        <GlobalStyle/>   
         <MenuNavegation>
           <Menu>
             <li>
